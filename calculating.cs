@@ -1,3 +1,13 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Analysis of the IAEF
+{
+    public class calculate
+    {
 //==============================================================================================================
 public static double NQ(double Φ)
         {
@@ -112,4 +122,8 @@ public static double NQ(double Φ)
                 i += 1;
             }
             return Fianl;
-  //==============================================================================================================
+         }
+
+    }
+}
+//=======================================================================================================================

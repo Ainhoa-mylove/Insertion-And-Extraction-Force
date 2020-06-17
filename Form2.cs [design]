@@ -1,0 +1,33 @@
+ private void button1_Click(object sender, EventArgs e)
+        {
+            List<double> Final =Form1.Final;
+            List<double> up_down = new List<double>();
+            double up = Convert.ToDouble(textBox1.Text);
+            double down = Convert.ToDouble(textBox2.Text);
+            for (double i = up; i < down;)
+            {
+                up_down.Add(i);
+                i += 0.1;
+            }
+            double[] up_down1 = up_down.ToArray();
+            var chart = chart1.ChartAreas[0];
+            chart.AxisX.IntervalType = DateTimeIntervalType.Number;
+            chart.AxisX.LabelStyle.Format = "";
+            chart.AxisY.LabelStyle.Format = "";
+            chart.AxisY.LabelStyle.IsEndLabelVisible = true;
+
+            chart.AxisX.Minimum = up_down.Min();
+            chart.AxisX.Maximum = up_down.Max();
+            chart.AxisY.Minimum = Final.Min();
+            chart.AxisY.Maximum = Final.Max();
+            chart.AxisX.Interval = 5;
+            chart.AxisY.Interval = 100;
+
+            chart1.Series.Add("The force of IANEF");
+            chart1.Series["The force of IANEF"].ChartType = SeriesChartType.Spline;
+            chart1.Series["The force of IANEF"].Color = Color.Red;
+            chart1.Series[0].IsVisibleInLegend = false;
+            for(int i=0;i<up_down1.Length;i++)
+            {
+                chart1.Series["The force of IANEF"].Points.AddXY(up_down[i], Final[i]);
+            }

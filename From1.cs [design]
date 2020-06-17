@@ -1,0 +1,65 @@
+there is nine button in Ainhoa.But they have the same code so lets take one of them for example
+
+//===============================================================================================
+  private void button3_Click(object sender, EventArgs e)
+        {
+            //first we need Instantiate values in text
+            double B = Convert.ToDouble(textBox29.Text);
+            double L = Convert.ToDouble(textBox28.Text);
+            double Dup = Convert.ToDouble(textBox1.Text);
+            double Ddown = Convert.ToDouble(textBox2.Text);
+            double  fy = Convert.ToDouble(textBox19.Text);
+            double  c = Convert.ToDouble(textBox38.Text);
+            double gama = Convert.ToDouble(textBox47.Text);
+            double nq = calculate.NQ(fy);
+            double nc = calculate.NC(fy);
+            double nr = calculate.NR(fy);
+            double sc = calculate.SC(B, L, fy);
+            double sq = calculate.SQ(B,L,fy);
+            double sr = sq;
+            List<double> dc = new List<double>();
+            List<double> dq = new List<double>();
+            List<double> dr = dq;
+            List<double> qu = new List<double>();
+            List<double> q = new List<double>();
+            //Calculate the individual values using the functions in the calculate class
+            for (double i = Dup; i < Ddown;)
+            {
+                double vs = calculate.DC(i, B, fy);
+                dc.Add(vs);
+                i += 0.1;
+
+            }
+            for (double i = Dup; i < Ddown;)
+            {
+                double vs1 = calculate.DQ(i, B, fy);
+                dq.Add(vs1);
+                i += 0.1;
+            }
+            for (double i = Dup; i < Ddown;)
+            {
+                double vs2 = calculate.Q(i, gama);
+                q.Add(vs2);
+                i += 0.1;
+
+            }
+            //=========================================================
+            //List<double> generic conversion to double[] requires the use of .ToArray
+            double[] q1 = q.ToArray();
+            double[] dc1 = dc.ToArray();
+            double[] dq1 = dq.ToArray();
+            double[] dr1 = dr.ToArray();
+            qu = calculate.QU(c, q1, B, gama, nq, nc, nr, sc, sq, sr, dc1, dq1, dr1);
+            double[] qu1 = qu.ToArray();
+            //Use the For loop to reserve values in the Qu array by four decimal places
+            for (int i = 0; i < qu1.Length; i++)
+            {
+                qu1[i] = Math.Round(qu1[i], 4);
+            }
+            for (int i = 0; i < qu1.Length; i++)
+            {
+                qu_max.Add(qu1[i]);
+
+            }es
+            MessageBox.Show("Calculate success");
+        }
